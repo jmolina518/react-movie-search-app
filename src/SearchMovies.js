@@ -6,8 +6,17 @@ function SearchMovies() {
     console.log('submitting');
 
     const query = 'Jurassic Park';
+    const API_KEY = process.env.REACT_APP_API_KEY;
 
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <form className='form' onSubmit={searchMovies}>
